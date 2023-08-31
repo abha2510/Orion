@@ -62,7 +62,10 @@ const MainFAQPage = () => {
       return () => clearTimeout(timer); 
     }
 }, [alert]);
-
+const saveInLS=(id)=>{
+    //  console.log(id)
+     localStorage.setItem("keyid",id)
+   }
   return (
     <FAQContainer>
         {alert && <div className="alert">{alert}</div>}
@@ -80,8 +83,8 @@ const MainFAQPage = () => {
               ))}
           </div>
 
-          <button>
-            <Link to={`/questions/${question._id}`}>View Detail</Link>
+          <button onClick={()=>saveInLS(question._id)}>
+            <Link to={'/detail'}>View Detail</Link>
           </button>
         </QuestionBlock>
       ))}

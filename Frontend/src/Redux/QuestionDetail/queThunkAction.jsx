@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import { setQuestions, setAnswers, addAnswer, setQuestionDetail, updateAnswerRating } from '../QuestionDetail/quesAction';
 
@@ -30,7 +29,8 @@ export const fetchAnswers = (authToken) => dispatch => {
     });
 };
 
-export const postNewAnswer = (id, newAnswer, authToken) => dispatch => {
+export const postNewAnswer = (id, newAnswer, authToken) => dispatch =>  {
+    // console.log("jhb",id)
     axios.post(`https://bewildered-suspenders-clam.cyclic.app/questions/${id}/answers`, {
         text: newAnswer
     }, {
@@ -39,6 +39,7 @@ export const postNewAnswer = (id, newAnswer, authToken) => dispatch => {
         }
     })
     .then(response => {
+        console.log(response.data)
         dispatch(addAnswer(response.data));
     })
     .catch(err => {
@@ -47,22 +48,26 @@ export const postNewAnswer = (id, newAnswer, authToken) => dispatch => {
 };
 
 
-export const fetchQuestionDetail = (authToken, questionId) => async dispatch => {
+export const fetchQuestionDetail = (authToken) => async dispatch => {
+
+    const keyID = localStorage.getItem("keyid");
+
     try {
-        const response = await axios.get(`https://bewildered-suspenders-clam.cyclic.app/questions/${questionId}`, {
+        const response = await axios.get(`https://bewildered-suspenders-clam.cyclic.app/questions/${keyID}`, {
             headers: {
                 'Authorization': `Bearer ${authToken}`
             }
         });
         dispatch(setQuestionDetail(response.data)); 
-        console.log(response.data);// This is a new action creator you should create to set a single question detail.
+        // console.log(response.data);// This is a new action creator you should create to set a single question detail.
     } catch (error) {
         console.error(error);
     }
 };
 
 
-export const incrementRating = (answerId, authToken) => async dispatch => {
+export const incrementRatingLocally = (answerId, authToken) => async (dispatch) => {
+    console.log("id",answerId)
     try {
         const response = await axios.patch(`https://bewildered-suspenders-clam.cyclic.app/answers/${answerId}/rate`,
         {

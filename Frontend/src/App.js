@@ -1,6 +1,4 @@
-// import Register from './Pages/Register';
-// import Login from './Pages/Login';
-//import AdminDashboard from "./Pages/AdminDashboard";
+
 import Login from "./Pages/Login";
 import MainFAQPage from "./Pages/MainFAQPage";
 import QuestionDetailPage from "./Pages/QuestionDetailPage";
@@ -21,7 +19,7 @@ function App() {
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />}/>
           <Route path="/admin" element={<AdminDashboard />}/>
-          <Route path="/questions/:id" element={<QuestionDetailPage />} />
+          <Route path="/detail" element={<QuestionDetailPage />} />
           <Route path="/logout" element={<Logout />} />
 
         </Routes>
